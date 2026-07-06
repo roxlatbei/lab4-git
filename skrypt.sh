@@ -33,6 +33,21 @@ create_logs() {
     echo "Utworzono $count plikow logow."
 }
 
+create_errors() {
+    local count=${1:-100}
+    for ((i = 1; i <= count; i++)); do
+        local dirname="error${i}"
+        local filename="${dirname}/error${i}.txt"
+        mkdir -p "$dirname"
+        {
+            echo "Nazwa pliku: error${i}.txt"
+            echo "Utworzony przez skrypt: $SCRIPT_NAME"
+            echo "Data utworzenia: $TODAY"
+        } > "$filename"
+    done
+    echo "Utworzono $count katalogow error."
+}
+
 do_init() {
     read -rp "Podaj adres URL repozytorium do sklonowania: " repo_url
     if [ -z "$repo_url" ]; then
@@ -56,6 +71,9 @@ case "$1" in
         ;;
     --logs|-l)
         create_logs "$2"
+        ;;
+    --error|-e)
+        create_errors "$2"
         ;;
     --init)
         do_init
