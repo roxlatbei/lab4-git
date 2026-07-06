@@ -12,7 +12,7 @@ show_date() {
 }
 
 create_logs() {
-    local count=100
+    local count=${1:-100}
     for ((i = 1; i <= count; i++)); do
         local filename="log${i}.txt"
         {
@@ -34,7 +34,7 @@ case "$1" in
         show_date
         ;;
     --logs)
-        create_logs
+        create_logs "$2"
         ;;
     *)
         echo "Nieznana opcja: $1"
