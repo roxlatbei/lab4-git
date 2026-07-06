@@ -13,6 +13,8 @@ show_help() {
     echo "Dostepne opcje:"
     echo "  --date, -d              Wyswietla dzisiejsza date"
     echo "  --logs [N], -l [N]      Tworzy N plikow logX.txt (domyslnie 100)"
+    echo "  --error [N], -e [N]     Tworzy N katalogow errorX/errorX.txt (domyslnie 100)"
+    echo "  --init                  Klonuje repozytorium do biezacego katalogu i dodaje je do PATH"
     echo "  --help, -h              Wyswietla ta pomoc"
 }
 
