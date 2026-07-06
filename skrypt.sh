@@ -11,9 +11,9 @@ show_help() {
     echo "Uzycie: $SCRIPT_NAME [OPCJA] [ARGUMENT]"
     echo ""
     echo "Dostepne opcje:"
-    echo "  --date, -d          Wyswietla dzisiejsza date"
-    echo "  --logs, -l [N]      Tworzy N plikow logX.txt (domyslnie 100)"
-    echo "  --help, -h          Wyswietla ta pomoc"
+    echo "  --date, -d              Wyswietla dzisiejsza date"
+    echo "  --logs [N], -l [N]      Tworzy N plikow logX.txt (domyslnie 100)"
+    echo "  --help, -h              Wyswietla ta pomoc"
 }
 
 show_date() {
@@ -33,6 +33,18 @@ create_logs() {
     echo "Utworzono $count plikow logow."
 }
 
+do_init() {
+    read -rp "Podaj adres URL repozytorium do sklonowania: " repo_url
+    if [ -z "$repo_url" ]; then
+        echo "Nie podano adresu repozytorium."
+        exit 1
+    fi
+    git clone "$repo_url" .
+    export PATH="$PATH:$(pwd)"
+    echo "export PATH=\"\$PATH:$(pwd)\"" >> "$HOME/.bashrc"
+    echo "Repozytorium sklonowane, katalog dodany do PATH."
+}
+
 if [ $# -eq 0 ]; then
     show_help
     exit 0
@@ -44,6 +56,9 @@ case "$1" in
         ;;
     --logs|-l)
         create_logs "$2"
+        ;;
+    --init)
+        do_init
         ;;
     --help|-h)
         show_help
