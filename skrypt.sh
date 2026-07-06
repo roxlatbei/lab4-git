@@ -11,9 +11,9 @@ show_help() {
     echo "Uzycie: $SCRIPT_NAME [OPCJA] [ARGUMENT]"
     echo ""
     echo "Dostepne opcje:"
-    echo "  --date              Wyswietla dzisiejsza date"
-    echo "  --logs [N]          Tworzy N plikow logX.txt (domyslnie 100)"
-    echo "  --help              Wyswietla ta pomoc"
+    echo "  --date, -d          Wyswietla dzisiejsza date"
+    echo "  --logs, -l [N]      Tworzy N plikow logX.txt (domyslnie 100)"
+    echo "  --help, -h          Wyswietla ta pomoc"
 }
 
 show_date() {
@@ -39,13 +39,13 @@ if [ $# -eq 0 ]; then
 fi
 
 case "$1" in
-    --date)
+    --date|-d)
         show_date
         ;;
-    --logs)
+    --logs|-l)
         create_logs "$2"
         ;;
-    --help)
+    --help|-h)
         show_help
         ;;
     *)
