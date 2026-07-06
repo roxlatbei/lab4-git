@@ -7,6 +7,15 @@
 SCRIPT_NAME=$(basename "$0")
 TODAY=$(date +"%Y-%m-%d")
 
+show_help() {
+    echo "Uzycie: $SCRIPT_NAME [OPCJA] [ARGUMENT]"
+    echo ""
+    echo "Dostepne opcje:"
+    echo "  --date              Wyswietla dzisiejsza date"
+    echo "  --logs [N]          Tworzy N plikow logX.txt (domyslnie 100)"
+    echo "  --help              Wyswietla ta pomoc"
+}
+
 show_date() {
     echo "Dzisiejsza data: $TODAY"
 }
@@ -25,7 +34,7 @@ create_logs() {
 }
 
 if [ $# -eq 0 ]; then
-    echo "Brak argumentow. Uzyj --help aby zobaczyc dostepne opcje."
+    show_help
     exit 0
 fi
 
@@ -36,8 +45,12 @@ case "$1" in
     --logs)
         create_logs "$2"
         ;;
+    --help)
+        show_help
+        ;;
     *)
         echo "Nieznana opcja: $1"
+        show_help
         exit 1
         ;;
 esac
